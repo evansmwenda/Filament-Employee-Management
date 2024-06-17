@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CountryResource\Pages;
-use App\Filament\Resources\CountryResource\RelationManagers;
-use App\Models\Country;
+use App\Filament\Resources\DepartmentResource\Pages;
+use App\Filament\Resources\DepartmentResource\RelationManagers;
+use App\Models\Department;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -16,9 +16,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CountryResource extends Resource
+class DepartmentResource extends Resource
 {
-    protected static ?string $model = Country::class;
+    protected static ?string $model = Department::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -29,9 +29,7 @@ class CountryResource extends Resource
                 Section::make()
                 ->schema([
                     TextInput::make('name'),
-                    TextInput::make('country_code'),
                 ])
-                
             ]);
     }
 
@@ -40,7 +38,6 @@ class CountryResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable(),
-                TextColumn::make('country_code')->sortable()->searchable(),
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('created_at'),
             ])
@@ -67,9 +64,9 @@ class CountryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCountries::route('/'),
-            'create' => Pages\CreateCountry::route('/create'),
-            'edit' => Pages\EditCountry::route('/{record}/edit'),
+            'index' => Pages\ListDepartments::route('/'),
+            'create' => Pages\CreateDepartment::route('/create'),
+            'edit' => Pages\EditDepartment::route('/{record}/edit'),
         ];
     }
 }
